@@ -115,6 +115,7 @@ public class Analisador {
 	}
 
 	public void analisarLista(Lista lista) {
+		System.out.println("Analisando Entrada.");
 		if (lista.cont == 0) {
 			System.out.println("Lista Vazia !!!");
 		} else {

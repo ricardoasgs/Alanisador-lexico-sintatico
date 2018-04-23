@@ -11,6 +11,8 @@ import com.analisador.planilha.Planilha;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		
 
 		Auxiliar aux = new Auxiliar();
 		
@@ -27,9 +29,12 @@ public class Main {
 		automato.analisarLista(lista);
 		
 		Planilha plan = new Planilha();
+		
+//		lista.Print();
+		
 		plan.expExcel(ConfigPath.OUTPUT_PATH_WINDOWS+ConfigPath.OUTPUT_FILENAME, lista );
 		
-		//lista.Print();
+		
 				
 
 	}

@@ -24,6 +24,7 @@ public class LeitorArquivo {
 
 	public String lerArquivo(String caminho) {
 		try {
+			System.out.println("Recuperando Entrada.");
 			BufferedReader br = new BufferedReader(new FileReader(caminho));
 			while (br.ready()) {
 				this.resultado = this.resultado.concat(br.readLine());

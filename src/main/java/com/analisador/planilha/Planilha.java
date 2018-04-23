@@ -25,9 +25,12 @@ public class Planilha {
         
         try {
         	
+        	System.out.println("Gerando saída.");
+        	
             fos = new FileOutputStream(new File(nomeArquivo));
 
             No aux = lista.head;
+            
                     
             while (aux != null) {
             	
@@ -40,13 +43,16 @@ public class Planilha {
             		j++;
             	} 
             	else if(!aux.getIgnorar()) {
-
+            		
             		HSSFRow row = firstSheet.createRow(i);
 
             		row.createCell(0).setCellValue(aux.getPalavra());
             		row.createCell(1).setCellValue(aux.getSimbolo());
             		aux = aux.getNext();
             		
+            	} else {
+            		aux = aux.getNext();
+            		i--;
             	}
             	i++;
             	
