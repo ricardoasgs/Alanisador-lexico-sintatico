@@ -1,10 +1,10 @@
 package com.analisador.auxiliar;
 
-import com.analisador.lista.Lista;
+import com.analisador.model.Lista;
 
 public class Auxiliar {
 
-	public static final char[] TOKENS = { '+', '-', '*', '/', '=', ' ' };
+	public static final char[] TOKENS = { '+', '-', '*', '/', '=', ' '};
 
 	public Auxiliar() {
 

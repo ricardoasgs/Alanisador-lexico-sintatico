@@ -1,11 +1,11 @@
 package com.analisador.main;
 
-import com.analisador.analisador.Analisador;
+import com.analisador.analisador.AnalisadorLexico;
+import com.analisador.analisador.AnalisadorSintatico;
 import com.analisador.arquivo.LeitorArquivo;
 import com.analisador.auxiliar.Auxiliar;
 import com.analisador.config.ConfigPath;
-
-import com.analisador.lista.Lista;
+import com.analisador.model.Lista;
 import com.analisador.planilha.Planilha;
 
 public class Main {
@@ -24,15 +24,19 @@ public class Main {
 		
 		lista.VericarLista();
 		
-		Analisador automato = new Analisador();
+		AnalisadorLexico automato = new AnalisadorLexico();
 		
 		automato.analisarLista(lista);
 		
-		Planilha plan = new Planilha();
+		AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico();
+		
+		analisadorSintatico.fazerAnaliseSintatica(lista);
+		
+		//Planilha plan = new Planilha();
 		
 //		lista.Print();
 		
-		plan.expExcel(ConfigPath.OUTPUT_PATH_WINDOWS+ConfigPath.OUTPUT_FILENAME, lista );
+		//plan.expExcel(ConfigPath.OUTPUT_PATH_WINDOWS+ConfigPath.OUTPUT_FILENAME, lista );
 		
 		
 				

@@ -1,49 +1,15 @@
 package com.analisador.analisador;
 
-import com.analisador.lista.Lista;
-import com.analisador.lista.No;
+import com.analisador.model.Dicionario;
+import com.analisador.model.Lista;
+import com.analisador.model.No;
 
-public class Analisador {
+public class AnalisadorLexico {
 
-	public static final String[] PALAVRA_CHAVE = { "BEGIN", "END" };
-	public static final char[] OPERADOR = { '+', '-', '*', '/', '=' };
-	public static final char[] NUMERO = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-	public static final char[] LETRA = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-			'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-	public static final char[] ESPECIAL = { '_' };
-	public static final char[] CARACTER_VALIDO = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-			'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '_' };
-
-	public Analisador() {
-
-	}
-
-	public static String[] getPalavraChave() {
-		return PALAVRA_CHAVE;
-	}
-
-	public static char[] getOperador() {
-		return OPERADOR;
-	}
-
-	public static char[] getNumero() {
-		return NUMERO;
-	}
-
-	public static char[] getLetra() {
-		return LETRA;
-	}
-
-	public static char[] getEspecial() {
-		return ESPECIAL;
-	}
-
-	public static char[] getCaracterValido() {
-		return CARACTER_VALIDO;
-	}
+	public AnalisadorLexico() {};
 
 	public boolean isPalavraChave(String string) {
-		String[] palavraChave = getPalavraChave();
+		String[] palavraChave = Dicionario.getPalavraChave();
 		for (String temp : palavraChave) {
 			if (string.equalsIgnoreCase(temp)) {
 				return true;
@@ -53,7 +19,7 @@ public class Analisador {
 	}
 
 	public boolean isNumero(String numero) {
-		char[] numeros = getNumero();
+		char[] numeros = Dicionario.getNumero();
 		if (numero.length() > 5) {
 			return false;
 		}
@@ -73,8 +39,8 @@ public class Analisador {
 	}
 
 	public boolean isVariavel(String string) {
-		char[] caracteresValidos = getCaracterValido();
-		char[] letras = getLetra();
+		char[] caracteresValidos = Dicionario.getCaracterValido();
+		char[] letras = Dicionario.getLetra();
 		for (int i = 0; i < string.length(); i++) {
 			for (int j = 0; j < caracteresValidos.length; j++) {
 				if (i == 0) {
@@ -101,7 +67,7 @@ public class Analisador {
 	}
 
 	public boolean isOperador(String operador) {
-		char[] operadores = getOperador();
+		char[] operadores = Dicionario.getOperador();
 		for (int i = 0; i < operador.length(); i++) {
 			for (int j = 0; j < operadores.length; j++) {
 				if (operador.charAt(i) == operadores[j]) {

@@ -7,8 +7,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.analisador.config.ConfigPath;
-import com.analisador.lista.Lista;
-import com.analisador.lista.No;
+import com.analisador.model.Lista;
+import com.analisador.model.No;
 
 public class Planilha {
 

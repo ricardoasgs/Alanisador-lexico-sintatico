@@ -1,4 +1,4 @@
-package com.analisador.lista;
+package com.analisador.model;
 
 public class No {
 

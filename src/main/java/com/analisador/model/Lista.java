@@ -1,4 +1,4 @@
-package com.analisador.lista;
+package com.analisador.model;
 
 public class Lista {
 
@@ -10,6 +10,10 @@ public class Lista {
 		head = null;
 		tail = null;
 		cont = 0;
+	}
+	
+	public int getCont(){
+		return this.cont;
 	}
 
 	public void insertLast(String palavra) {
@@ -23,6 +27,19 @@ public class Lista {
 			tail = novo;
 		}
 		cont++;
+	}
+	
+	public No removeFirst() {
+		if (cont == 0) {
+			System.out.println("Lista Vazia");
+			return null;
+		}
+		else {
+			No headAntigo = head;
+			head = head.getNext();
+			cont --;
+			return headAntigo;
+		}
 	}
 
 

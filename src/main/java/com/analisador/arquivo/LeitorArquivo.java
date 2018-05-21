@@ -28,6 +28,7 @@ public class LeitorArquivo {
 			BufferedReader br = new BufferedReader(new FileReader(caminho));
 			while (br.ready()) {
 				this.resultado = this.resultado.concat(br.readLine());
+				this.resultado += " ";
 			}
 			br.close();
 		} catch (IOException ioe) {
