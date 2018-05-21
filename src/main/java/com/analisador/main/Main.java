@@ -2,6 +2,7 @@ package com.analisador.main;
 
 import com.analisador.analisador.AnalisadorLexico;
 import com.analisador.analisador.AnalisadorSintatico;
+import com.analisador.analisador.GerenciadorErros;
 import com.analisador.arquivo.LeitorArquivo;
 import com.analisador.auxiliar.Auxiliar;
 import com.analisador.config.ConfigPath;
@@ -10,7 +11,7 @@ import com.analisador.planilha.Planilha;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws GerenciadorErros {
 		
 		
 
@@ -24,13 +25,11 @@ public class Main {
 		
 		lista.VericarLista();
 		
-		AnalisadorLexico automato = new AnalisadorLexico();
+		AnalisadorLexico.analisarLista(lista);
 		
-		automato.analisarLista(lista);
+		AnalisadorSintatico.fazerAnaliseSintatica(lista);
 		
-		AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico();
-		
-		analisadorSintatico.fazerAnaliseSintatica(lista);
+		System.out.println("Compilou!");
 		
 		//Planilha plan = new Planilha();
 		

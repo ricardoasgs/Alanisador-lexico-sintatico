@@ -3,12 +3,13 @@ package com.analisador.analisador;
 import com.analisador.model.Dicionario;
 import com.analisador.model.Lista;
 import com.analisador.model.No;
+import com.analisador.model.TabelaSimbolosEnum;
 
 public class AnalisadorLexico {
 
 	public AnalisadorLexico() {};
 
-	public boolean isPalavraChave(String string) {
+	public static boolean isPalavraChave(String string) {
 		String[] palavraChave = Dicionario.getPalavraChave();
 		for (String temp : palavraChave) {
 			if (string.equalsIgnoreCase(temp)) {
@@ -18,10 +19,11 @@ public class AnalisadorLexico {
 		return false;
 	}
 
-	public boolean isNumero(String numero) {
+	public static boolean isNumero(String numero) throws GerenciadorErros {
 		char[] numeros = Dicionario.getNumero();
 		if (numero.length() > 5) {
-			return false;
+			throw new GerenciadorErros("Numero possui muitos digitos.");
+//			return false;
 		}
 		for (int i = 0; i < numero.length(); i++) {
 			for (int j = 0; j < numeros.length; j++) {
@@ -33,12 +35,13 @@ public class AnalisadorLexico {
 			}
 		}
 		if (Integer.parseInt(numero) > 32767) {
-			return false;
+			throw new GerenciadorErros("Numero acima do tamanho esperado.");
+//			return false;
 		}
 		return true;
 	}
 
-	public boolean isVariavel(String string) {
+	public static boolean isVariavel(String string) {
 		char[] caracteresValidos = Dicionario.getCaracterValido();
 		char[] letras = Dicionario.getLetra();
 		for (int i = 0; i < string.length(); i++) {
@@ -66,7 +69,7 @@ public class AnalisadorLexico {
 		return true;
 	}
 
-	public boolean isOperador(String operador) {
+	public static boolean isOperador(String operador) {
 		char[] operadores = Dicionario.getOperador();
 		for (int i = 0; i < operador.length(); i++) {
 			for (int j = 0; j < operadores.length; j++) {
@@ -80,7 +83,7 @@ public class AnalisadorLexico {
 		return true;
 	}
 
-	public void analisarLista(Lista lista) {
+	public static void analisarLista(Lista lista) throws GerenciadorErros {
 		System.out.println("Analisando Entrada.");
 		if (lista.cont == 0) {
 			System.out.println("Lista Vazia !!!");
@@ -89,20 +92,16 @@ public class AnalisadorLexico {
 			while (aux != null) {
 				if(!aux.getIgnorar()) {
 					if (isPalavraChave(aux.getPalavra())) {
-//						aux.setSimbolo("PALAVRA_CHAVE");
-						aux.setSimbolo("4");
+						aux.setSimbolo(TabelaSimbolosEnum.PALAVRA_CHAVE);
 					} else if (isOperador(aux.getPalavra())) {
-//						aux.setSimbolo("OPERADOR");
-						aux.setSimbolo("2");
+						aux.setSimbolo(TabelaSimbolosEnum.OPERADOR);
 					} else if (isNumero(aux.getPalavra())) {
-//						aux.setSimbolo("NUMERO");
-						aux.setSimbolo("3");
+						aux.setSimbolo(TabelaSimbolosEnum.NUMERO);
 					} else if (isVariavel(aux.getPalavra())) {
-//						aux.setSimbolo("VARIAVEL");
-						aux.setSimbolo("1");
+						aux.setSimbolo(TabelaSimbolosEnum.VARIAVEL);
 					} else {
-//						aux.setSimbolo("NÂO RECONHECIDO");
-						aux.setSimbolo("5");
+						aux.setSimbolo(TabelaSimbolosEnum.NAO_RECONHECIDO);
+						throw new GerenciadorErros("Token não reconhecido pela linguagem.");
 					}
 				}
 				aux = aux.getNext();

@@ -47,7 +47,7 @@ public class Planilha {
             		HSSFRow row = firstSheet.createRow(i);
 
             		row.createCell(0).setCellValue(aux.getPalavra());
-            		row.createCell(1).setCellValue(aux.getSimbolo());
+            		row.createCell(1).setCellValue(aux.getSimbolo().getCodigo());
             		aux = aux.getNext();
             		
             	} else {

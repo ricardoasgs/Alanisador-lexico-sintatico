@@ -2,17 +2,18 @@ package com.analisador.analisador;
 
 import com.analisador.model.Lista;
 import com.analisador.model.No;
+import com.analisador.model.TabelaSimbolosEnum;
 
 public class AnalisadorSintatico {
 	
 	private static No token;
 	private static Lista lista;
 
-	public static void fazerAnaliseSintatica(Lista listaParam){
+	public static void fazerAnaliseSintatica(Lista listaParam) throws GerenciadorErros{
 		lista = listaParam;
 		obtenha_simbolo();
 		if(!token.getPalavra().equalsIgnoreCase("begin")){
-			System.out.println("Falta o begin");
+			throw new GerenciadorErros("Falta o begin");
 		}
 		while(lista.getCont() != 1){
 			obtenha_simbolo();
@@ -22,7 +23,7 @@ public class AnalisadorSintatico {
 		
 	}
 	
-	public static void expressao() {
+	public static void expressao() throws GerenciadorErros {
 		termo();
 
 		if (token.getPalavra().equals("+")) {
@@ -40,7 +41,7 @@ public class AnalisadorSintatico {
 		
 	}
 
-	public static void termo(){
+	public static void termo() throws GerenciadorErros {
 		fator();
 		if(token.getPalavra().equals("*")){
 			obtenha_simbolo();
@@ -52,29 +53,29 @@ public class AnalisadorSintatico {
 		}
 	}
 	
-	public static void fator(){
+	public static void fator() throws GerenciadorErros {
 		primario();
 		
 	}
 	
-	public static void primario() {
-		if (token.getSimbolo() == "1") {
+	public static void primario() throws GerenciadorErros {
+		if (token.getSimbolo() == TabelaSimbolosEnum.VARIAVEL) {
 			obtenha_simbolo();
-		} else if (token.getSimbolo() == "3") {
+		} else if (token.getSimbolo() == TabelaSimbolosEnum.NUMERO) {
 			obtenha_simbolo();
 		}  else {
-			System.out.println("Erro de sintaxe");
+			throw new GerenciadorErros("Erro de sintaxe");
 		}
 	}
 	
-	public static void obtenha_simbolo(){
+	public static void obtenha_simbolo() throws GerenciadorErros {
 		
 		token = lista.removeFirst();
 		if (token.ignorar && token != lista.tail) {
 			obtenha_simbolo();
 		}else if (token == lista.tail) {
 			if(!token.getPalavra().equals("end")){
-				System.out.println("Falta o end");
+				throw new GerenciadorErros("Falta o end");
 			}
 		}else  {
 			System.out.println("obteve simbolo: "+token.getPalavra());

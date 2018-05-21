@@ -3,7 +3,7 @@ package com.analisador.model;
 public class No {
 
 	public String palavra;
-	public String simbolo;
+	public TabelaSimbolosEnum simbolo;
 	public No next;
 	public boolean ignorar;
 
@@ -18,7 +18,7 @@ public class No {
 		return next;
 	}
 
-	public String getSimbolo() {
+	public TabelaSimbolosEnum getSimbolo() {
 		return simbolo;
 	}
 	
@@ -34,7 +34,7 @@ public class No {
 		this.next = n;
 	}
 
-	public void setSimbolo(String simbolo) {
+	public void setSimbolo(TabelaSimbolosEnum simbolo) {
 		this.simbolo = simbolo;
 	}
 	
